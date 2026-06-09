@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Garden Dreams — интернет-магазин цветов</title>
+    <meta name="description" content="Garden Dreams — нежные авторские букеты, созданные для ваших чувств." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body data-page="home">
+    <header class="site-header">
+      <nav class="navbar container">
+        <a class="logo" href="index.html" aria-label="Garden Dreams на главную">
+          <span class="logo-mark">✿</span>
+          <span>Garden Dreams</span>
+        </a>
+        <button class="menu-toggle" type="button" aria-label="Открыть меню">☰</button>
+        <div class="nav-links">
+          <a href="catalog.html">Каталог</a>
+          <a href="index.html#about">О нас</a>
+          <a class="cart-link" href="cart.html">Корзина <span class="cart-count">0</span></a>
+          <a href="auth.html">Вход</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container hero-grid">
+          <div class="hero-copy reveal">
+            <span class="eyebrow">Intagonist floral atelier</span>
+            <h1>Ваш уникальный букет — наша философия</h1>
+            <p>Каждый букет — отражение ваших чувств</p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="catalog.html">Создать букет</a>
+              <a class="btn btn-soft" href="#about">Узнать больше</a>
+            </div>
+          </div>
+          <div class="hero-flower reveal delay-1" aria-hidden="true">
+            <div class="flower-card">
+              <div class="flower-shape">
+                <span></span><span></span><span></span><span></span><span></span>
+                <strong></strong>
+              </div>
+              <div class="mini-bouquet">Авторские букеты<br /><b>от 2 490 ₽</b></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="features container">
+        <article class="feature-card reveal">
+          <span>01</span>
+          <h3>Свежие цветы</h3>
+          <p>Подбираем нежные сезонные оттенки и бережно собираем каждый букет.</p>
+        </article>
+        <article class="feature-card reveal delay-1">
+          <span>02</span>
+          <h3>Свой характер</h3>
+          <p>Каждая композиция выглядит живой, мягкой и индивидуальной.</p>
+        </article>
+        <article class="feature-card reveal delay-2">
+          <span>03</span>
+          <h3>Быстрая доставка</h3>
+          <p>Красиво упакуем и доставим букет для особенного момента.</p>
+        </article>
+      </section>
+
+      <section id="about" class="about-section">
+        <div class="container about-grid">
+          <div class="about-visual reveal" aria-hidden="true">
+            <div class="placeholder-image large-placeholder">Garden<br />Dreams</div>
+          </div>
+          <div class="about-copy reveal delay-1">
+            <span class="eyebrow">О нас</span>
+            <h2>Нежный магазин цветов для красивых признаний</h2>
+            <p>Мы создаём букеты в розовой, кремовой и воздушной палитре — для свиданий, праздников, благодарности и моментов, которые хочется запомнить.</p>
+            <a class="text-link" href="catalog.html">Перейти в каталог</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-grid">
+        <div>
+          <h3>Garden Dreams</h3>
+          <p>Современный интернет-магазин цветов с нежной эстетикой.</p>
+        </div>
+        <div>
+          <h4>Контакты</h4>
+          <p>Email: hello@gardendreams.ru</p>
+          <p>Телефон: +7 900 123-45-67</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="./script.js"></script>
+  </body>
+</html>

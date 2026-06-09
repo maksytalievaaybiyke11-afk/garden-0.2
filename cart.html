@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Корзина — Garden Dreams</title>
+    <meta name="description" content="Корзина интернет-магазина цветов Garden Dreams." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body data-page="cart">
+    <header class="site-header">
+      <nav class="navbar container">
+        <a class="logo" href="index.html"><span class="logo-mark">✿</span><span>Garden Dreams</span></a>
+        <button class="menu-toggle" type="button" aria-label="Открыть меню">☰</button>
+        <div class="nav-links">
+          <a href="catalog.html">Каталог</a>
+          <a href="index.html#about">О нас</a>
+          <a class="cart-link" href="cart.html">Корзина <span class="cart-count">0</span></a>
+          <a href="auth.html">Вход</a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="page-main">
+      <section class="page-hero container reveal">
+        <span class="eyebrow">Корзина</span>
+        <h1>Ваш заказ</h1>
+        <p>Проверьте выбранные букеты перед оформлением.</p>
+      </section>
+      <section class="container cart-layout">
+        <div id="cartItems" class="cart-items"></div>
+        <aside class="cart-summary reveal delay-1">
+          <h2>Итого</h2>
+          <div class="summary-row"><span>Сумма заказа</span><strong id="cartTotal">0 ₽</strong></div>
+          <button class="btn btn-primary full-width" id="checkoutBtn" type="button">Оформить заказ</button>
+          <p class="summary-note">Менеджер свяжется с вами для подтверждения доставки.</p>
+        </aside>
+      </section>
+    </main>
+
+    <div class="toast" id="toast">Заказ оформлен</div>
+
+    <footer class="footer">
+      <div class="container footer-grid">
+        <div>
+          <h3>Garden Dreams</h3>
+          <p>Спасибо, что выбираете нежность.</p>
+        </div>
+        <div>
+          <h4>Контакты</h4>
+          <p>Email: hello@gardendreams.ru</p>
+          <p>Телефон: +7 900 123-45-67</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="./script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Вход и регистрация — Garden Dreams</title>
+    <meta name="description" content="Вход и регистрация покупателей Garden Dreams." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body data-page="auth">
+    <header class="site-header">
+      <nav class="navbar container">
+        <a class="logo" href="index.html"><span class="logo-mark">✿</span><span>Garden Dreams</span></a>
+        <button class="menu-toggle" type="button" aria-label="Открыть меню">☰</button>
+        <div class="nav-links">
+          <a href="catalog.html">Каталог</a>
+          <a href="index.html#about">О нас</a>
+          <a class="cart-link" href="cart.html">Корзина <span class="cart-count">0</span></a>
+          <a href="auth.html">Вход</a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="auth-main">
+      <section class="auth-card reveal">
+        <div class="auth-intro">
+          <span class="eyebrow">Личный кабинет</span>
+          <h1 id="authTitle">Создать аккаунт</h1>
+          <p>Сохраняйте свои данные локально и возвращайтесь к любимым букетам.</p>
+        </div>
+        <div class="auth-tabs">
+          <button class="auth-tab active" type="button" data-auth-mode="register">Регистрация</button>
+          <button class="auth-tab" type="button" data-auth-mode="login">Вход</button>
+        </div>
+        <form id="authForm" class="auth-form">
+          <label id="nameField">
+            <span>Имя</span>
+            <input type="text" id="userName" placeholder="Анна" autocomplete="name" />
+          </label>
+          <label>
+            <span>Email</span>
+            <input type="email" id="userEmail" placeholder="anna@mail.ru" autocomplete="email" required />
+          </label>
+          <label>
+            <span>Пароль</span>
+            <input type="password" id="userPassword" placeholder="Минимум 4 символа" autocomplete="current-password" required />
+          </label>
+          <button class="btn btn-primary full-width" type="submit" id="authSubmit">Зарегистрироваться</button>
+        </form>
+        <p id="authMessage" class="auth-message"></p>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-grid">
+        <div>
+          <h3>Garden Dreams</h3>
+          <p>Ваши данные сохраняются только в localStorage этого браузера.</p>
+        </div>
+        <div>
+          <h4>Контакты</h4>
+          <p>Email: hello@gardendreams.ru</p>
+          <p>Телефон: +7 900 123-45-67</p>
+        </div>
+      </div>
+    </footer>
+      <script type="module">
+      // 1. Firebase кызматтарын импорттоо (v10 CDN колдонобуз)
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+      import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+      // 2. Сиздин жеке Firebase конфигурацияңыз
+      const firebaseConfig = {
+  apiKey: "AIzaSyDcMlcAC0N7Gw-Jhl5U7VDuqrXXX3LObqc",
+  authDomain: "garden-0.firebaseapp.com",
+  databaseURL: "https://garden-0-default-rtdb.firebaseio.com",
+  projectId: "garden-0",
+  storageBucket: "garden-0.firebasestorage.app",
+  messagingSenderId: "40210401998",
+  appId: "1:40210401998:web:74550d772fa9047ad6de9f",
+  measurementId: "G-4SR53KWBQY"
+};
+
+      // 3. Firebase'ди ишке киргизүү
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+
+      // DOM элементтерин кармап алуу
+      const authForm = document.getElementById('authForm');
+      const userNameInput = document.getElementById('userName');
+      const userEmailInput = document.getElementById('userEmail');
+      const userPasswordInput = document.getElementById('userPassword');
+      const authMessage = document.getElementById('authMessage');
+      const authSubmitBtn = document.getElementById('authSubmit');
+      
+      // Сиздин интерфейстеги өтмөктөр (Регистрация / Вход)
+      const tabs = document.querySelectorAll('.auth-tab');
+      const nameField = document.getElementById('nameField');
+      const authTitle = document.getElementById('authTitle');
+      let currentMode = 'register'; // баштапкы режим
+
+      // Өтмөктөрдү которуштуруу логикасы (Регистрация <-> Вход)
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          tabs.forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+          
+          currentMode = tab.getAttribute('data-auth-mode');
+          
+          if (currentMode === 'login') {
+            authTitle.textContent = 'Войти в аккаунт';
+            authSubmitBtn.textContent = 'Войти';
+            nameField.style.display = 'none'; // Кирүүдө "Имя" талаасы көрүнбөйт
+            userNameInput.removeAttribute('required');
+          } else {
+            authTitle.textContent = 'Создать аккаунт';
+            authSubmitBtn.textContent = 'Зарегистрироваться';
+            nameField.style.display = 'flex'; // Каттоодо "Имя" керек
+          }
+          authMessage.textContent = ''; // Билдирүүлөрдү тазалоо
+        });
+      });
+
+      // Форма жөнөтүлгөндө иштей турган негизги функция
+      authForm.addEventListener('submit', async (e) => {
+        e.preventDefault(); // Баракчанын кайра жүктөлүшүн токтотот
+        
+        const email = userEmailInput.value.trim();
+        const password = userPasswordInput.value;
+        const name = userNameInput.value.trim();
+        
+        authMessage.textContent = "Сураныч, күтө туруңуз...";
+        authMessage.style.color = "#a1887f"; // Күрөң/алтын түс (дизайнга ылайык)
+
+        try {
+          if (currentMode === 'register') {
+            // КАТТОО (Регистрация)
+            if (password.length < 6) {
+              throw new Error("Пароль кеминде 6 символдон турушу керек (Firebase талабы).");
+            }
+            
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            const user = userCredential.user;
+            
+            // Колдонуучунун атын профилине сактоо
+            if (name) {
+              await updateProfile(user, { displayName: name });
+            }
+            
+            authMessage.style.color = "green";
+            authMessage.textContent = `Ийгиликтүү катталдыңыз! Кош келиңиз, ${name || user.email}!`;
+            
+            // Катталгандан кийин башкы бетке багыттоо (мисалы, 2 секунддан кийин)
+            setTimeout(() => { window.location.href = 'index.html'; }, 2000);
+
+          } else {
+            // КИРҮҮ (Вход)
+            const userCredential = await signInWithEmailAndPassword(auth, email, password);
+            const user = userCredential.user;
+            
+            authMessage.style.color = "green";
+            authMessage.textContent = `Ийгиликтүү кирдиңиз! Кош келиңиз, ${user.displayName || user.email}!`;
+            
+            // Киргенден кийин башкы бетке багыттоо
+            setTimeout(() => { window.location.href = 'index.html'; }, 2000);
+          }
+        } catch (error) {
+          // Каталарды кыргызча/орусча түшүндүрүү
+          authMessage.style.color = "red";
+          console.error(error);
+          
+          if (error.code === 'auth/email-already-in-use') {
+            authMessage.textContent = "Бул Email дареги катталган!";
+          } else if (error.code === 'auth/invalid-credential' || error.code === 'auth/wrong-password') {
+            authMessage.textContent = "Email же пароль ката жазылды!";
+          } else if (error.code === 'auth/invalid-email') {
+            authMessage.textContent = "Email форматы туура эмес!";
+          } else {
+            authMessage.textContent = error.message; // Башка каталар үчүн
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

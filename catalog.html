@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Каталог букетов — Garden Dreams</title>
+    <meta name="description" content="Каталог нежных авторских букетов Garden Dreams." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body data-page="catalog">
+    <header class="site-header">
+      <nav class="navbar container">
+        <a class="logo" href="index.html"><span class="logo-mark">✿</span><span>Garden Dreams</span></a>
+        <button class="menu-toggle" type="button" aria-label="Открыть меню">☰</button>
+        <div class="nav-links">
+          <a href="catalog.html">Каталог</a>
+          <a href="index.html#about">О нас</a>
+          <a class="cart-link" href="cart.html">Корзина <span class="cart-count">0</span></a>
+          <a href="auth.html">Вход</a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="page-main">
+      <section class="page-hero container reveal">
+        <span class="eyebrow">Каталог</span>
+        <h1>Букеты, которые говорят за вас</h1>
+        <p>Выберите готовую композицию или начните с понравившегося настроения.</p>
+      </section>
+      <section class="container">
+        <div id="productsGrid" class="products-grid"></div>
+      </section>
+    </main>
+
+    <div class="toast" id="toast">Букет добавлен в корзину</div>
+
+    <footer class="footer">
+      <div class="container footer-grid">
+        <div>
+          <h3>Garden Dreams</h3>
+          <p>Свежие цветы, нежные оттенки и бережная доставка.</p>
+        </div>
+        <div>
+          <h4>Контакты</h4>
+          <p>Email: hello@gardendreams.ru</p>
+          <p>Телефон: +7 900 123-45-67</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
